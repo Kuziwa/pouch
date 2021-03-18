@@ -1,0 +1,352 @@
+<div class="container-fluid">
+    <app-page-title title="PouchFile   Uploader" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+    <!-- <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">Dropzone</div>
+            <p class="card-title-desc">DropzoneJS is an open source library
+              that provides drag’n’drop file uploads with image previews.
+            </p>
+            <div>
+              <form>
+                <ngx-dropzone (change)="onSelect($event)">
+                  <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} </ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+              </form>
+            </div>
+            <div class="text-center mt-4">
+              <button type="button"  class="btn btn-primary">Send Files</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="row" *ngIf="showList">
+        <div class="col-lg-4">
+            <div class="card border border-primary">
+                <div class="card-header bg-transparent border-primary">
+                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow mr-3"></i>Uploaded Documents</h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title mt-0">No Additional Data</h5>
+                    <p *ngFor="let file of myFiles; index as i"  (click)="openFile(file)">
+                       {{i+1}}.  {{file.code}} {{file.filePath}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-8">
+            <div class="card border border-success">
+                <div class="card-header bg-transparent border-success">
+                    <h5 class="my-0 text-success"><i class="mdi mdi-check-all mr-3"></i>Updated Documents</h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title mt-0">Files With Additional Data</h5>
+                    <div class="row">
+                        <div class="card-body"> 
+                            <div class="table-responsive">
+                              <table class="table table-sm m-0">
+                                <thead>
+                                  <tr>
+                                      <th>#</th>
+                                    <th>Code</th>
+                                    <th>File Path</th>
+                                    <th>  Department</th>
+                                    <th>Contract/Employee #</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let file of updatedFiles; index as i">
+                                      <td>{{i+1}}</td>
+                                    <th scope="row" (click)="openFile(file)">{{file.code}}</th>
+                                    <td>{{file.filePath}}</td>
+                                    <td>{{file.department}} </td>
+                                    <td>{{file.contractNumber}} {{file.employeeNumber}} </td>
+                                  </tr>
+                                   
+                                </tbody>
+                              </table>
+                  
+                            </div>
+                  
+                          </div>
+                     
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-9">
+            <div id="mypdf" class="pdfobject-container"></div>
+        </div>
+        <div class="col-lg-3" *ngIf="showDetailForm">
+            <h3 (click)="backToList()">Detail</h3>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="form-group row">
+                                <label for="example-text-input" class="col-md-6col-form-label">Department</label>
+
+                                <select class="custom-select" id="" name="" [(ngModel)]="newDocument.department"
+                                    (change)="setDepartment()">
+                                    <option selected>Select Department</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="HR">HR</option>
+                                    <option value="Procurement">Procurement</option>
+                                </select>
+                            </div>
+                            <!-- <div class="form-group row">
+                  <label for="example-search-input" class="col-md-6col-form-label">Document Type</label>
+                  <select class="custom-select">
+                    <option selected>Select Type of Document</option>
+                    <option value="PO">Purchase Order</option>
+                    <option value="Contract">Supplier Contract</option>
+                    <option value="Personal">Personal</option>
+                  </select>
+                </div> -->
+
+                            <span *ngIf="newDocument.department=='Finance'">
+                                <div class="row">
+                                    <h4>Purchase Order</h4>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Contract
+                                        Number</label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.contractNumber"
+                                        id="contN" name="contN">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Purchase Order Number
+                                         </label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.poNumber"
+                                        id="contN" name="contN">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label"> 
+                                        Purchase Order Date</label> 
+                                        <div class="input-group clockpicker">
+                                            <input ngbDatepicker class="form-control" placeholder="yyyy-mm-dd" 
+                                            [(ngModel)]="newDocument.poDate"
+                                                id="podate" name="podate" #d="ngbDatepicker">
+                                            <div class="input-group-append" (click)="d.toggle()">
+                                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                          </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Payment
+                                        Number</label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.paymentNumber"
+                                        id="pnum" name="pnum">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Payment Date
+                                         </label> 
+                                        <div class="input-group clockpicker">
+                                            <input [(ngModel)]="newDocument.paymentDate"
+                                        id="pdate" name="pdate" ngbDatepicker class="form-control" placeholder="yyyy-mm-dd" #e="ngbDatepicker">
+                                            <div class="input-group-append" (click)="e.toggle()">
+                                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                          </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">  Supplier Name
+                                         </label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.supplier"
+                                        id="supplier" name="supplier">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Invoice Number
+                                         </label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.invoiceNumber"
+                                        id="inv" name="inv">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Invoice Date
+                                         </label> 
+                                        <div class="input-group clockpicker">
+                                            <input ngbDatepicker class="form-control" placeholder="yyyy-mm-dd" 
+                                            [(ngModel)]="newDocument.invoicedate"
+                                            id="invd" name="invd" #f="ngbDatepicker">
+                                            <div class="input-group-append" (click)="f.toggle()">
+                                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                          </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Amount
+                                         </label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.amount"
+                                        id="amnt" name="amnt">
+                                </div>
+                            </span>
+                            <span *ngIf="newDocument.department=='HR'">
+                                <div class="row">
+                                    <h4>Personal Record</h4>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Employee 
+                                        Number</label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.employeeNumber"
+                                        id="emp" name="emp">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Department
+                                         </label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.department"
+                                        id="dpt" name="dpt">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label"> 
+                                        Position</label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.position"
+                                        id="pos" name="pos">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label"> 
+                                        First Name</label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.firstName"
+                                        id="fname" name="fname">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">  Last Name
+                                         </label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.lastName"
+                                        id="lname" name="lname">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">  Date of Birth
+                                         </label> 
+                                        <div class="input-group clockpicker">
+                                            <input ngbDatepicker 
+                                             [(ngModel)]="newDocument.dob"
+                                                id="dob" name="dob" class="form-control" placeholder="yyyy-mm-dd" #g="ngbDatepicker">
+                                            <div class="input-group-append" (click)="g.toggle()">
+                                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                          </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">ID Number
+                                         </label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.idNumber"
+                                        id="idnum" name="idnum">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Permanent/Contract
+                                         </label>
+                                         <select class="custom-select" id="pc" name="pc" [(ngModel)]="newDocument.permOrContract"
+                                          > 
+                                         <option value="permanent">Permanent</option>
+                                         <option value="contract">Contract</option> 
+                                     </select>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Start of Contract
+                                         </label> 
+                                        <div class="input-group clockpicker">
+                                            <input ngbDatepicker [(ngModel)]="newDocument.contractStart"
+                                        id="contStart" name="contStart" class="form-control" placeholder="yyyy-mm-dd" #h="ngbDatepicker">
+                                            <div class="input-group-append" (click)="h.toggle()">
+                                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                          </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">End of Contract
+                                         </label> 
+                                        <div class="input-group clockpicker">
+                                            <input ngbDatepicker [(ngModel)]="newDocument.contractEnd"
+                                        id="contEnd" name="contEnd" class="form-control" placeholder="yyyy-mm-dd" #j="ngbDatepicker">
+                                            <div class="input-group-append" (click)="j.toggle()">
+                                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                          </div>
+                                </div>
+                            </span>
+                            <span *ngIf="newDocument.department=='Procurement'">
+                                <div class="row">
+                                    <h4>Contract</h4>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Contract 
+                                        Number</label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.contractNumber"
+                                        id="cnum" name="cnum">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label">Supplier
+                                         </label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.supplier"
+                                        id="supl" name="supl">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label"> 
+                                        Contract Amount</label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.contractAmount"
+                                        id="camnt" name="camnt">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label"> 
+                                       Contract Start Date</label> 
+                                        <div class="input-group clockpicker">
+                                            <input ngbDatepicker [(ngModel)]="newDocument.contractStart"
+                                        id="contractStart" name="contractStart" class="form-control" placeholder="yyyy-mm-dd" #k="ngbDatepicker">
+                                            <div class="input-group-append" (click)="k.toggle()">
+                                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                          </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label"> 
+                                       Contract End Date</label> 
+                                        <div class="input-group clockpicker">
+                                            <input ngbDatepicker  class="form-control" placeholder="yyyy-mm-dd" #l="ngbDatepicker">
+                                            <div class="input-group-append" (click)="l.toggle()">
+                                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                          </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label"> 
+                                       Extension End Date</label> 
+                                        <div class="input-group clockpicker">
+                                            <input ngbDatepicker [(ngModel)]="newDocument.extEndDate"
+                                        id="extEndDate" name="extEndDate" class="form-control" placeholder="yyyy-mm-dd" #m="ngbDatepicker">
+                                            <div class="input-group-append" (click)="m.toggle()">
+                                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                          </div> 
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-email-input" class="col-md-6col-form-label"> Months Remaining
+                                         </label>
+                                    <input class="form-control" type="text" [(ngModel)]="newDocument.monthsRemaining"
+                                        id="monthsRemaining" name="monthsRemaining">
+                                </div> 
+                            </span>  
+                            <div class="row">
+                                <button class="btn btn-success" (click)="saveFile()">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div>
+
+        </div>
+    </div>
+</div>

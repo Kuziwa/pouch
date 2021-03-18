@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <app-page-title title="Form File Upload" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">PouchFile Document Collector</div>
+          <p class="card-title-desc"> Simple and easy to use. Just drag and drop!
+          </p>
+          <div>
+            <form>
+              <ngx-dropzone (change)="onSelect($event)">
+                <ngx-dropzone-label>Drop Files Here</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} </ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </form>
+          </div>
+          <div class="text-center mt-4">
+            <button type="button" (click)="viewUploadedFiles()"  class="btn btn-primary">View Uploaded Files</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-lg-6" *ngIf="showList">
+      <h3>List docs</h3>
+      <p *ngFor="let file of myFiles" 
+           (click)="openFile(file)">
+        {{file.code}}  {{file.filePath}}
+      </p>
+    </div>
+    <div class="col-lg-9"  > 
+      <div id="mypdf" class="pdfobject-container"></div>
+    </div>
+    <div class="col-lg-3" *ngIf="showDetailForm">
+      <h3 (click)="backToList()">Detail</h3>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+     
+              <div class="form-group">
+                <label for="example-text-input" class="col-md-6col-form-label">Text</label>
+                 
+                  <input class="form-control" type="text" value="Artisanal kale" id="example-text-input">
+                
+              </div>
+              <div class="form-group row">
+                <label for="example-search-input" class="col-md-6col-form-label">Search</label>
+                 
+                  <input class="form-control" type="search" value="How do I shoot web" id="example-search-input">
+               
+              </div>
+              <div class="form-group row">
+                <label for="example-email-input" class="col-md-6col-form-label">Email</label>
+               
+                  <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input">
+               
+              </div>
+              <div class="form-group row">
+                <label for="example-url-input" class="col-md-6col-form-label">URL</label>
+               
+                  <input class="form-control" type="url" value="https://getbootstrap.com" id="example-url-input">
+             
+              </div>
+              <div class="form-group row">
+                <label for="example-tel-input" class="col-md-6col-form-label">Telephone</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="tel" value="1-(555)-555-5555" id="example-tel-input">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-password-input" class="col-md-6col-form-label">Password</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="password" value="hunter2" id="example-password-input">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-number-input" class="col-md-6col-form-label">Number</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="number" value="42" id="example-number-input">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-datetime-local-input" class="col-md-6col-form-label">Date and time</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="datetime-local" value="2019-08-19T13:45:00"
+                    id="example-datetime-local-input">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-date-input" class="col-md-6col-form-label">Date</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="date" value="2019-08-19" id="example-date-input">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-month-input" class="col-md-6col-form-label">Month</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="month" value="2019-08" id="example-month-input">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-week-input" class="col-md-6col-form-label">Week</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="week" value="2019-W33" id="example-week-input">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="example-time-input" class="col-md-6col-form-label">Time</label>
+                <div class="col-md-10">
+                  <input class="form-control" type="time" value="13:45:00" id="example-time-input">
+                </div>
+              </div>  
+            </div>
+          </div>
+        </div>  
+      </div>
+      
+    </div>
+  </div> -->
+</div>
