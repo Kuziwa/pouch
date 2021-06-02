@@ -19,4 +19,5 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule { }
+
 // canActivate: [AuthGuard]

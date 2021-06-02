@@ -9,12 +9,14 @@ import { TablesRoutingModule } from './tables-routing.module';
 import { AdvancedSortableDirective } from './advancedtable/advanced-sortable.directive'
 import { BasicComponent } from './basic/basic.component';
 import { AdvancedtableComponent } from './advancedtable/advancedtable.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+import { EngineeringComponent } from './engineering/engineering.component';
 
 @NgModule({
-  declarations: [BasicComponent, AdvancedtableComponent, AdvancedSortableDirective],
+  declarations: [BasicComponent, AdvancedtableComponent, AdvancedSortableDirective, EngineeringComponent],
   imports: [
     CommonModule,
-    TablesRoutingModule,
+    TablesRoutingModule, HighchartsChartModule,
     UIModule,
     NgbPaginationModule,
     NgbTypeaheadModule,

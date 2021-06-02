@@ -1,13 +1,13 @@
 <div class="container-fluid">
-  <app-page-title title="Advanced Table" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <app-page-title title="Administration" [breadcrumbItems]="breadCrumbItems"></app-page-title>
 
   <div class="row">
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Advanced Data Table</h4>
+          <h4 class="card-title">Sales</h4>
           <p class="card-sub-title">
-            Example of datatable.
+            Stand Sales
           </p>
           <div class="row mb-md-2">
             <div class="col-sm-12 col-md-6">
@@ -38,11 +38,11 @@
               <thead>
                 <tr>
                   <th sortable="name" (sort)="onSort($event)">Name</th>
-                  <th sortable="position" (sort)="onSort($event)">Position</th>
-                  <th sortable="office" (sort)="onSort($event)">Office</th>
-                  <th sortable="age" (sort)="onSort($event)">Age</th>
-                  <th sortable="date" (sort)="onSort($event)">Start date</th>
-                  <th sortable="salary" (sort)="onSort($event)">Salary</th>
+                  <th sortable="position" (sort)="onSort($event)">Job</th>
+                  <th sortable="office" (sort)="onSort($event)">Stand No.</th>
+                  <th sortable="age" (sort)="onSort($event)">Size (sqm)</th>
+                  <th sortable="date" (sort)="onSort($event)">Purchase date</th>
+                  <th sortable="salary" (sort)="onSort($event)">Paid</th>
                 </tr>
               </thead>
               <tbody>

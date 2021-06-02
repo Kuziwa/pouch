@@ -30,14 +30,16 @@ export class CryptoComponent implements OnInit {
   constructor(private dbs: DbService) { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Dashboards' }, { label: 'Crypto', active: true }];
-
+    this.breadCrumbItems = [{ label: 'Procurement' }, { label: 'Contracts', active: true }];
+    this.updatedFiles=[];
     //this._fetchData();
   this.dbs.collection$('files').subscribe(data=>{
     console.log(data);
     data.forEach(file=>{
-      if (file['updated']==true){
-        this.updatedFiles.push(file)
+      if (file['updated']==true && file['department']=='Procurement'){
+        this.updatedFiles.push(file);
+        console.log(this.updatedFiles);
+        
       }else{
         this.newUploads.push(file)
       }

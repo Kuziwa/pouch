@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { BasicComponent } from './basic/basic.component';
 import { AdvancedtableComponent } from './advancedtable/advancedtable.component';
+import { EngineeringComponent } from './engineering/engineering.component';
 
 const routes: Routes = [
     {
@@ -12,6 +13,10 @@ const routes: Routes = [
     {
         path: 'advanced',
         component: AdvancedtableComponent
+    },
+    {
+        path: 'engineering',
+        component: EngineeringComponent
     }
 ];
 

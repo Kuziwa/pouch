@@ -18,7 +18,7 @@ import { AdvancedSortableDirective, SortEvent } from './advanced-sortable.direct
 })
 
 /**
- * Advanced table component
+ * Administration component
  */
 export class AdvancedtableComponent implements OnInit {
   // bread crum data
@@ -38,7 +38,7 @@ export class AdvancedtableComponent implements OnInit {
   }
   ngOnInit() {
 
-    this.breadCrumbItems = [{ label: 'Tables' }, { label: 'Advanced Table', active: true }];
+    this.breadCrumbItems = [{ label: 'Tables' }, { label: 'Administration', active: true }];
 
     /**
      * fetch data

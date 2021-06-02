@@ -1,558 +1,447 @@
 <div class="container-fluid">
-  <app-page-title title="Basic Tables" [breadcrumbItems]="breadCrumbItems"></app-page-title>
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Basic example</h4>
-          <p class="card-title-desc">For basic styling—light padding and
-            only horizontal dividers—add the base class <code>.table</code> to any
-            <code>&lt;table&gt;</code>.
-          </p>
+    <app-page-title title="Inspections" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
 
-          <div class="table-responsive">
-            <table class="table mb-0">
+                    <h4 class="card-title" (click)="calcFwd()">Booked Inspections</h4>
+                    <p class="card-title-desc">Inspections booked by clients..
+                    </p>
+                    <div class="row">
+                         
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark mb-0">
 
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                            <thead>
+                                <tr>
+                                    <th>Stand No.</th>
+                                    <th>Name</th>
 
+                                    <th>Levels Passed</th>
+                                    <th>Current Level</th>
+                                </tr>
+                            </thead> 
+                            <tbody>
+                                <tr *ngFor="let client of clients" (click)="scrollModal(scrollDataModal, client)">
+                                    <th scope="row">{{client.standNo}}</th>
+                                    <td>{{client.name}}</td>
+                                    <td>{{client.passedInspections.length}}</td>
+                                    <td>{{client.currentLevel}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
 
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Dark table</h4>
-          <p class="card-title-desc">You can also invert the colors—with light text on dark backgrounds—with
-            <code>.table-dark</code>.
-          </p>
+                    <h4 class="card-title">Complete Inspections </h4>
+                    <p class="card-title-desc"> Work done by Inspector and marked as
+                        <code>Complete</code>.
+                    </p>
 
-          <div class="table-responsive">
-            <table class="table table-dark mb-0">
 
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+
+                            <thead>
+                                <tr>
+                                    <th>Stand No.</th>
+                                    <th>Name</th>
+
+                                    <th>Levels Passed</th>
+                                    <th>Current Level</th>
+                                    <th>Sttatus</th>
+                                </tr>
+                            </thead> 
+                            <tbody>
+                                <tr *ngFor="let client of completeInspections" (click)="scrollModal(scrollDataModal, client)">
+                                    <th scope="row">{{client.standNo}}</th>
+                                    <td>{{client.name}}</td>
+                                    <td>{{client.passedInspections.length}}</td>
+                                    <td>{{client.currentLevel}}</td>
+                                    <td>{{client.approved}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
         </div>
-      </div>
+
+
     </div>
-  </div>
-  <!-- end row -->
+    <!-- end row -->
 
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Table head</h4>
-          <p class="card-title-desc">Use one of two modifier classes to make <code>&lt;thead&gt;</code>s appear light or
-            dark gray.</p>
 
-          <div class="table-responsive">
-            <table class="table mb-0">
+    <!-- <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="nav-tabs-custom">
+                    <div class="row">
+                    </div>
+                    <ul class="nav nav-tabs pull-right">
+                        <li class="active">
+                            <a href="#rates-tab" data-toggle="tab">
+                                Rates
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#leave-dates-tab" data-toggle="tab">
+                                Yield Curve Definition
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#corporate-rates-tab" data-toggle="tab">
+                                Corporate Rates
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#latest-news-tab" data-toggle="tab">
+                                Latest News
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="rates-tab">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="name1">
+                                            Horizon Type
+                                        </label>
+                                        <select class="form-control" id="horizonType" name="horizonType"
+                                            [(ngModel)]="horizonType">
+                                            <option value="days">Daily</option>
+                                            <option value="weeks">Weekly</option>
+                                            <option value="months">Monthly</option>
+                                            <option value="years">Annual</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="name1">
+                                            Number of {{horizons}}
+                                        </label>
+                                        <input type="number" class="form-control" id="horizonCount" name="horizonCount"
+                                            [(ngModel)]="horizonCount">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="name1">
+                                            Base Date
+                                        </label>
+                                        <input type="date" class="form-control" id="isDefaultResetCurve"
+                                            name="isDefaultResetCurve" (change)="setHorizonDates()"
+                                            [(ngModel)]="baseDate">
+                                    </div>
+                                </div>
 
-              <thead class="thead-light">
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table ">
+                                            <thead>
+                                                <tr>
+                                                    <th (click)="calcPrices()">Time</th>
+                                                    <th style="text-align: right;" width="100px">Jibar/Swap <br>Rate
+                                                    </th>
+                                                    <th style="text-align: right;">Spot Rate</th>
+                                                    <th style="text-align: right;">Discount Factor</th>
+                                                    <th style="text-align: right;">Discount Factor2</th>
+                                                    <th style="text-align: right;">Fwd Rate</th>
+                                                    <th style="text-align: right;">Margin</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of rateArray">
+                                                    <td style="text-align: right">{{item.time}}</td>
+                                                    <td>
+                                                        <small>
+                                                            <input style="text-align: right" type="number"
+                                                                class="form-control" [(ngModel)]="item.rate" name="rate"
+                                                                id="rate">
+                                                        </small>
+                                                    </td>
+                                                    <td style="text-align: right">{{item.spot | number:'1.3-3'}}</td>
+                                                    <td style="text-align: right">{{item.spot2 | number:'1.3-3'}}</td>
+                                                    <td style="text-align: right">{{item.discountFactor |
+                                                        number:'1.5-5'}}</td>
+                                                    <td style="text-align: right">{{item.discountFactor2 |
+                                                        number:'1.5-5'}}</td>
+                                                    <td style="text-align: right">{{item.fwd | number:'1.3-3'}}</td>
+                                                    <td style="text-align: right">{{item.margin | number:'1.5-5'}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="name1">
+                                                        Payment Frequency
+                                                    </label>
+                                                    <input type="number" class="form-control" id="frequency"
+                                                        name="frequency" [(ngModel)]="frequency">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button class="btn btn-primary" (click)="run()">Run</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="row" *ngIf="showGraph">
+                                <section class="col-lg-12">
+                                    <highcharts-chart [Highcharts]="Highcharts" [options]="rateChart"
+                                        style="width: 100%; height: 400px; display: block;">
+                                    </highcharts-chart>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="leave-dates-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h2 data-toggle="modal" href="#" (click)="newCurve={}" data-target="#newCurve">Yield
+                                        Curve List</h2>
+                                    <div class="row">
+                                        <div class="sol-md-12">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Code</th>
+                                                        <th>Description</th>
+                                                        <th>Currency</th>
+                                                        <th>Last Updated</th>
+                                                        <th>Horizon Type</th>
+                                                        <th>Base Date</th>
+                                                        <th>Compounding Type</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let curve of yieldCurves">
+                                                        <td>{{curve.code}} </td>
+                                                        <td>{{curve.description}} </td>
+                                                        <td>{{curve.currencyId}} </td>
+                                                        <td>{{curve.lastUpdatedDate}} </td>
+                                                        <td>{{curve.yieldCurveYearType}} </td>
+                                                        <td>{{curve.yieldCurveBaseDate}} </td>
+                                                        <td>{{curve.yieldCurveCompoundType}} </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6"></div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="corporate-rates-tab">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>MBF Rate</th>
+                                            <th>Nominal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>data</td>
+                                            <td>data</td>
+                                            <td>data</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="latest-news-tab">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </section> -->
 
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Striped rows</h4>
-          <p class="card-title-desc">Use <code>.table-striped</code> to add zebra-striping to any table row within the
-            <code>&lt;tbody&gt;</code>.</p>
 
-          <div class="table-responsive">
-            <table class="table table-striped mb-0">
+    <div class="modal fade active" id="newCurve">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">
+                        New Yield Curve
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    {{newCurve | json}}
 
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    Yield Curve Code
+                                    <i class="fa fa-asterisk text-danger"></i>
+                                </label>
+                                <input type="text" class="form-control" id="code" name="code"
+                                    [(ngModel)]="newCurve.code">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    <span> Description</span>
+                                </label>
+                                <input type="text" class="form-control" id="discription" name="discription"
+                                    [(ngModel)]="newCurve.description">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    <span> Compound Type</span>
+                                </label>
+                                <input type="text" class="form-control" id="compoundType" name="compoundType"
+                                    [(ngModel)]="newCurve.yieldCurveCompoundType">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    <span> Horizon Type</span>
+                                </label>
+                                <input type="text" class="form-control" id="yieldCurveYearType"
+                                    name="yieldCurveYearType" [(ngModel)]="newCurve.yieldCurveYearType">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    Currency
+                                    <i class="fa fa-asterisk text-danger"></i>
+                                </label>
+                                <input type="number" class="form-control" id="currency" name="currency"
+                                    [(ngModel)]="newCurve.currencyId">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    Is Default
+                                    <i class="fa fa-asterisk text-danger"></i>
+                                </label>
+                                <input type="text" class="form-control" id="isDefault" name="isDefault"
+                                    [(ngModel)]="newCurve.isDefaultDiscountCurve">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    Last Updated Date
+                                </label>
+                                <input type="date" class="form-control" id="lastUpdatedDate" name="lastUpdatedDate"
+                                    [(ngModel)]="newCurve.lastUpdatedDate">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    Base Date
+                                </label>
+                                <input type="date" class="form-control" id="yieldCurveBaseDate"
+                                    name="yieldCurveBaseDate" [(ngModel)]="newCurve.yieldCurveBaseDate">
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    Yield Curve Data Type
+                                    <i class="fa fa-asterisk text-danger"></i>
+                                </label>
+                                <input type="text" class="form-control" id="yieldCurveDataType"
+                                    name="yieldCurveDataType" [(ngModel)]="newCurve.yieldCurveDataType">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    Default Interpolation Type
+                                    <i class="fa fa-asterisk text-danger"></i>
+                                </label>
+                                <select class="form-control" id="defaultInterpolationType"
+                                    name="defaultInterpolationType" [(ngModel)]="newCurve.defaultInterpolationType">
+                                    <option>Nearest Neighbor</option>
+                                    <option>Linear</option>
+                                    <option>Cubic Spline</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="name1">
+                                    Default Reset Curve
+                                </label>
+                                <input type="date" class="form-control" id="isDefaultResetCurve"
+                                    name="isDefaultResetCurve" [(ngModel)]="newCurve.isDefaultResetCurve">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" data-toggle="tooltip"
+                        (click)="saveCurve()">Save</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
         </div>
-      </div>
     </div>
-  </div>
-  <!-- end row -->
-
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Bordered table</h4>
-          <p class="card-title-desc">Add <code>.table-bordered</code> for borders on all sides of the table and cells.
-          </p>
-
-          <div class="table-responsive">
-            <table class="table table-bordered mb-0">
-
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Borderless table</h4>
-          <p class="card-title-desc"> Add <code>.table-borderless</code> for a table without borders.</p>
-
-          <div class="table-responsive">
-            <table class="table table-borderless mb-0">
-
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end row -->
-
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Hoverable rows</h4>
-          <p class="card-title-desc">Add <code>.table-hover</code> to enable a hover state on table rows within a
-            <code>&lt;tbody&gt;</code>.</p>
-
-          <div class="table-responsive">
-            <table class="table table-hover mb-0">
-
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Small table</h4>
-          <p class="card-title-desc"> Add <code>.table-sm</code> to make tables more compact by cutting cell padding in
-            half.</p>
-
-          <div class="table-responsive">
-            <table class="table table-sm m-0">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">5</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-              </tbody>
-            </table>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end row -->
-
-  <div class="row">
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Contextual classes</h4>
-          <p class="card-title-desc">Use contextual classes to color table rows or individual cells.</p>
-
-          <div class="table-responsive">
-            <table class="table mb-0">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Column heading</th>
-                  <th>Column heading</th>
-                  <th>Column heading</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="table-light">
-                  <th scope="row">1</th>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                </tr>
-
-                <tr class="table-success">
-                  <th scope="row">2</th>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                </tr>
-
-                <tr class="table-info">
-                  <th scope="row">3</th>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                </tr>
-
-                <tr class="table-warning">
-                  <th scope="row">4</th>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                </tr>
-
-                <tr class="table-danger">
-                  <th scope="row">5</th>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                  <td>Column content</td>
-                </tr>
-              </tbody>
-            </table>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Captions</h4>
-          <p class="card-title-desc">A <code>&lt;caption&gt;</code> functions like a heading for a table. It helps users
-            with screen readers to find a table and understand what it’s about and decide if they want to read it.</p>
-
-          <div class="table-responsive">
-            <table class="table mb-0">
-              <caption>List of users</caption>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end row -->
-
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Responsive tables</h4>
-          <p class="card-title-desc">
-            Create responsive tables by wrapping any <code>.table</code> in <code>.table-responsive</code>
-            to make them scroll horizontally on small devices (under 768px).
-          </p>
-
-          <div class="table-responsive">
-            <table class="table mb-0">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                  <th>Table heading</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                  <td>Table cell</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end row -->
 </div>
+
+<!-- Scrollable Modal -->
+<ng-template #scrollDataModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title mt-0">{{selectedClient.name}}</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Stand No {{selectedClient.standNo}}</p>
+
+        <p>Passed Levels: {{selectedClient.passedInspections}} . </p>
+       
+        <h4> Current Level: {{selectedClient.currentLevel}} . </h4>
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges('Approved'); modal.close('Close click')">Approve</button>
+        <button type="button" class="btn btn-danger" (click)="saveChanges('Snag'); modal.close('Close click')">Snag</button>
+    </div>
+</ng-template>

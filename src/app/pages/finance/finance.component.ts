@@ -26,6 +26,7 @@ export class FinanceComponent implements OnInit {
  newDocument: any = {};
   selectedDepartment: any="";
   updatedFiles: any=[];
+  selectedId: any;
 
  constructor(private storage: AngularFireStorage, private db: AngularFirestore,
             private dbs: DbService, private route:Router) { }
@@ -61,6 +62,9 @@ export class FinanceComponent implements OnInit {
    this.showList=true;
  }
  public openFile(file){
+   console.log(file);
+   this.selectedId=file.id
+   
    pdfObject.embed(file.downloadURL, "#mypdf");
    this.showFile=true;
    this.showDetailForm = true;
@@ -69,7 +73,7 @@ export class FinanceComponent implements OnInit {
  }
  saveFile(){
    this.newDocument.updated = true;
-    this.dbs.updateAt('files',this.newDocument);
+    this.dbs.updateAt('files/'+this.selectedId+'/',this.newDocument);
     this.showDetailForm =false;
     this.showFile =false;
     this.showList =true;

@@ -15,7 +15,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 2,
                 label: 'Update Document Data',
-                link: '/finance',
+                link: '/dataCapture',
                 parentId: 1
             },
             
@@ -29,29 +29,53 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 5,
-        label: 'Finance',
+        label: 'Client Portal',
         icon: 'bx-home-circle',
-        subItems: [
-            {
-                id: 6,
-                label: 'Default',
-                link: '/dashboard',
-                parentId: 1
-            },
+        subItems: [ 
             {
                 id: 7,
-                label: 'Saas',
-                link: '/dashboards/saas',
+                label: 'HR',
+                link: '/dashboards/hr',
                 parentId: 1
             },
             {
                 id: 8,
-                label: 'Crypto',
-                link: '/dashboards/crypto',
+                label: 'Procurement',
+                link: '/dashboards/procurement',
+                parentId: 1
+            },
+            {
+                id: 9,
+                label: 'Finance',
+                link: '/dashboards/finance',
                 parentId: 1
             },
         ]
     },
+    {
+                    id: 69,
+                    label: 'Departments',
+                    subItems: [
+                        {
+                            id: 70,
+                            label: 'Inspector',
+                            link: '/tables/basic',
+                            parentId: 69
+                        },
+                        {
+                            id: 71,
+                            label: 'Administration',
+                            link: '/tables/advanced',
+                            parentId: 69
+                        },
+                        {
+                            id: 75,
+                            label: 'Engineering',
+                            link: '/tables/engineering',
+                            parentId: 69
+                        },
+                    ]
+                },
     // {
     //     id: 5,
     //     label: 'UI Elements',
@@ -449,7 +473,7 @@ export const MENU: MenuItem[] = [
     //                 },
     //                 {
     //                     id: 71,
-    //                     label: 'Advanced Table',
+    //                     label: 'Administration',
     //                     link: '/tables/advanced',
     //                     parentId: 69
     //                 }

@@ -25,7 +25,7 @@ import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { DbService } from './db.service';
 import { AngularFireModule } from '@angular/fire';
-import { NgxDropzoneModule } from 'ngx-dropzone';
+import { NgxDropzoneModule } from 'ngx-dropzone'; 
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -40,7 +40,7 @@ if (environment.defaultauth === 'firebase') {
     CyptolandingComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule, 
     BrowserAnimationsModule,  AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule, AngularFirestoreModule,
     LayoutsModule, NgxDropzoneModule,

@@ -2,71 +2,71 @@ const tableData = [
   {
     name: 'Timoteo Lyddy',
     position: 'Recruiting Manager',
-    office: 'Vidago',
-    age: 29,
+    office: '101 Vidago',
+    age: 2900,
     date: '2018/12/04',
     salary: '$11700'
   }, {
     name: 'Cherye Bleby',
     position: 'Quality Engineer',
-    office: 'La Concordia',
-    age: 62,
+    office: '231 La Concordia',
+    age: 3200,
     date: '2018/10/04',
     salary: '$14700'
   }, {
-    name: 'Zacharias O\'Shaughnessy',
+    name: 'Zacharias Shaughnessy',
     position: 'Senior Editor',
-    office: 'Maungatapere',
-    age: 26,
+    office: '65 Maungatapere',
+    age: 2600,
     date: '2018/07/30',
     salary: '$11600'
   }, {
     name: 'Odie Jentin',
     position: 'Programmer II',
-    office: 'Grabovci',
-    age: 26,
+    office: '54 Grabovci Drive',
+    age: 2600,
     date: '2019/05/16',
-    salary: '$11200'
+    salary: '$11400'
   }, {
     name: 'Eugenie Sang',
     position: 'Operator',
-    office: 'Oxbow',
-    age: 59,
+    office: '23 Oxbow',
+    age: 3300,
     date: '2019/07/16',
     salary: '$15200'
   }, {
     name: 'Sammy Guyers',
     position: 'Mechanical Systems Engineer',
-    office: 'Sanhe',
-    age: 53,
+    office: '11 Sanhe',
+    age: 4200,
     date: '2019/07/09',
     salary: '$14200'
   }, {
     name: 'Tarah Blick',
     position: 'Paralegal',
-    office: 'Fylí',
-    age: 23,
+    office: '21 Fylí',
+    age: 5600,
     date: '2018/12/14',
     salary: '$15200'
   }, {
     name: 'Jemie Ormshaw',
     position: 'Systems Administrator II',
-    office: 'Vila Fria',
-    age: 28,
+    office: '33 Vila Fria',
+    age: 3500,
     date: '2019/05/15',
     salary: '$14400'
   }, {
     name: 'Gerrie Semeradova',
     position: 'Research Associate',
-    office: 'Balykchy',
-    age: 26,
+    office: '62 Balykchy',
+    age: 4200,
     date: '2018/09/28',
     salary: '$14900'
   }, {
     name: 'Ottilie Mostyn',
     position: 'Accounting Assistant II',
-    office: 'Eskilstuna',
-    age: 43,
+    office: '101 Eskilstuna',
+    age: 3800,
     date: '2018/08/20',
     salary: '$11300'
   }, {

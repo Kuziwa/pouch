@@ -550,7 +550,7 @@ export const MENU: MenuItem[] = [
             },
             {
                 id: 90,
-                label: 'Advanced Table',
+                label: 'Administration',
                 link: '/tables/advanced',
                 parentId: 88
             }

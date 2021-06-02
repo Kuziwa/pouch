@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { emailSentBarChart, monthlyEarningChart, transactions, statData } from './data';
 
 import { ChartType } from './dashboard.model';
+import { DbService } from 'src/app/db.service';
 
 @Component({
   selector: 'app-default',
@@ -15,11 +16,26 @@ export class DefaultComponent implements OnInit {
   monthlyEarningChart: ChartType;
   transactions;
   statData;
+  newUploads: any=[];
+  updatedFiles: any=[];
 
-  constructor() { }
+  constructor(private dbs: DbService) { }
 
   ngOnInit() {
-
+    this.updatedFiles=[];
+    this.dbs.collection$('files').subscribe(data=>{
+      console.log(data);
+      data.forEach(file=>{
+        if (file['updated']==true && file['department']=='Finance'){
+          this.updatedFiles.push(file);
+          console.log(this.updatedFiles);
+          
+        }else{
+          this.newUploads.push(file)
+        }
+      })
+      
+    })
     /**
      * Fetches the data
      */

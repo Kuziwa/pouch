@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { DbService } from 'src/app/db.service';
 
 import { earningLineChart, salesAnalyticsDonutChart, ChatData } from './data';
 
@@ -14,7 +15,7 @@ import { ChartType, ChatMessage } from './saas.model';
 export class SaasComponent implements OnInit {
   // bread crumb items
   breadCrumbItems: Array<{}>;
-
+  term: string;
   earningLineChart: ChartType;
   salesAnalyticsDonutChart: ChartType;
   ChatData: ChatMessage[];
@@ -24,9 +25,11 @@ export class SaasComponent implements OnInit {
   // Form submit
   chatSubmit: boolean;
 
-  configData;
-
-  constructor(public formBuilder: FormBuilder) { }
+  configData; 
+  newUploads: any=[];
+  updatedFiles: any=[];
+ 
+  constructor(public formBuilder: FormBuilder, private dbs: DbService) { }
   /**
    * Returns form
    */
@@ -36,8 +39,21 @@ export class SaasComponent implements OnInit {
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Dashboards' }, { label: 'Saas', active: true }];
-
+    this.updatedFiles=[];
     this._fetchData();
+    this.dbs.collection$('files').subscribe(data=>{
+      console.log(data);
+      data.forEach(file=>{
+        if (file['updated']==true && file['department']=='HR'){
+          this.updatedFiles.push(file);
+          console.log(this.updatedFiles);
+          
+        }else{
+          this.newUploads.push(file)
+        }
+      })
+      
+    })
 
     this.formData = this.formBuilder.group({
       message: ['', [Validators.required]],
